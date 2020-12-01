@@ -9,18 +9,18 @@ type subscriber struct {
 	active bool
 }
 
-func printInfo(s subscriber) {
+func printInfo(s *subscriber) {
 	fmt.Println("Name : ", s.name)
 	fmt.Println("Monthly rate : ", s.rate)
 	fmt.Println("Active? ", s.active)
 }
 
-func defaultSubscriber(name string) subscriber {
+func defaultSubscriber(name string) *subscriber {
 	var s subscriber
 	s.name = name
 	s.rate = 5000
 	s.active = true
-	return s
+	return &s  //(&)주소가 가르키는 값을 (*)리턴 시킨다 
 }
 
 func applyDiscount(s *subscriber) {
@@ -29,8 +29,10 @@ func applyDiscount(s *subscriber) {
 
 func main() {
 	//가입중이던 구독자
-	s1 := defaultSubscriber("cho")
-	s1.rate = 4500
+	s1 := defaultSubscriber("cho") 
+	//s가 가르키는 값을 포인터 형으로 리턴 받고 반환된 값을 applyDiscount함수에 포인트형 s1을 보내면 5000이라는 값을 가진  s.rate가 4000을 가르키게 된다
+	//s1.rate = 4500
+	applyDiscount(s1)
 	printInfo(s1)
 
 	//오늘 가입한 구독자
