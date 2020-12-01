@@ -23,6 +23,10 @@ func defaultSubscriber(name string) subscriber {
 	return s
 }
 
+func applyDiscount(s *subscriber) {
+	s.rate = 4000
+}
+
 func main() {
 	//가입중이던 구독자
 	s1 := defaultSubscriber("cho")
@@ -32,4 +36,8 @@ func main() {
 	//오늘 가입한 구독자
 	s2 := defaultSubscriber("park")
 	printInfo(s2)
+
+	var s3 subscriber
+	applyDiscount(&s3)
+	fmt.Println(s3.rate)
 }
